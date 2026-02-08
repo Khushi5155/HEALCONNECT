@@ -88,24 +88,36 @@ export default function HowItWorks() {
       <main className="bg-white dark:bg-gray-900 min-h-screen text-gray-800 dark:text-gray-100 relative overflow-hidden pt-24">
 
         {/* Background Bubbles */}
-        <div className="absolute inset-0 w-full h-full overflow-hidden -z-10">
-          {[0, 1, 2].map((i) => (
-            <div
-              key={i}
-              className="absolute rounded-full animate-float"
-              style={{
-                width: `${300 - i * 50}px`,
-                height: `${300 - i * 50}px`,
-                top: `${-100 + i * 50}px`,
-                left: `${-100 + i * 100}px`,
-                background:
-                  "linear-gradient(135deg, rgba(37, 99, 235, 0.15) 0%, rgba(16, 185, 129, 0.15) 100%)",
-                animationDelay: `${-i * 7}s`,
-              }}
-            />
-          ))}
-        </div>
-        <style jsx>{`
+<div className="absolute inset-0 w-full h-full overflow-hidden -z-10">
+  {[0, 1, 2].map((i) => (
+    <div
+      key={i}
+      className="absolute rounded-full animate-float"
+      style={{
+        width: `${300 - i * 50}px`,
+        height: `${300 - i * 50}px`,
+        top: `${-100 + i * 50}px`,
+        left: `${-100 + i * 100}px`,
+        background:
+          "linear-gradient(135deg, rgba(37, 99, 235, 0.15) 0%, rgba(16, 185, 129, 0.15) 100%)",
+        animationDelay: `${-i * 7}s`,
+      }}
+    />
+  ))}
+</div>
+
+<style jsx>{`
+  /* Standardizing the float animation for a smooth, continuous loop */
+  @keyframes float {
+    0%, 100% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+    50% {
+      transform: translate(-20px, 20px) rotate(-15deg);
+    }
+  }
+
+  /* Keeping your requested slow variations */
   @keyframes floatSlow {
     0%, 100% {
       transform: translateY(0px);
@@ -114,32 +126,19 @@ export default function HowItWorks() {
       transform: translateY(-20px);
     }
   }
+
+  .animate-float {
+    animation: float 20s infinite ease-in-out;
+  }
+
   .animate-float-slow {
     animation: floatSlow 6s ease-in-out infinite;
   }
+
   .animate-pulse-slow {
     animation: pulse 3s ease-in-out infinite;
   }
 `}</style>
-
-
-        <style jsx>{`
-          @keyframes float {
-            0%, 100% {
-              transform: translate(0, 0) rotate(0deg);
-            }
-            33% {
-              transform: translate(30px, -30px) rotate(60deg);
-            }
-            66% {
-              transform: translate(-20px, 20px) rotate(-30deg);
-            }
-          }
-          .animate-float {
-            animation: float 20s infinite ease-in-out;
-          }
-        `}</style>
-
         <div className="container mx-auto px-6 py-16 relative z-10">
           {/* Hero Section */}
           <motion.header
